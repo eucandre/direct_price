@@ -109,11 +109,12 @@ $(function() {
         function verifica() {
 
             cidades = document.getElementById("citys");
-            {% for i in  obj %}
+
                 if(cidades.value !== "---"){
                     document.getElementById('t').innerHTML = cidades.value;
                 }
-                if (cidades.value === "{{ i.nomMunicipio }}"){
+                {% for i in  locale %}
+                if (cidades.value == "{{ i.nomMunicipio }}"){
                     $(document).ready(function(){
                         $("button").click(function(){
                             $("p").html('<div class="col-md-12 checkbox"><li class="list-group-item"><input type="checkbox" name="p" class="valores" class="w3-check" id="p" value="{{i.valUltimaVenda}}">{{i.dscProduto}} R$ {{i.valUltimaVenda}} <input type="text" size="45" id="municipio" value="{{ i.nomMunicipio }}" disabled/></li></div>');
@@ -173,16 +174,16 @@ function myFunction() {
             </select>
 
         <span id="t"></span>
-       <button onclick="verifica()">Verificar</button>
-            {% for i in obj %}
-	  			{% comment %}<div class="col-md-12 checkbox">
+        {% for i in obj %}
+	  			<div class="col-md-12 checkbox">
 	  			<li class="list-group-item"><input type="checkbox" name="p" class="valores" class="w3-check" id='p' value="{{i.valUltimaVenda}}">
 	  			{{i.dscProduto}} R$ {{i.valUltimaVenda}} <input type="text" size="45" id="municipio" value="{{ i.nomMunicipio }}" disabled/></li>
-	  		    </div>{% endcomment %}
+	  		    </div>
 
 					<br />
 
 	  		{% endfor %}
+            <!--<button onclick="verifica()">Verificar</button>-->
 	  	</ul>	
   	</div>
 

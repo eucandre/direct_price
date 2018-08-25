@@ -67,68 +67,20 @@
 
 </script> -->
 <script >
-$(function() {
-    list = [];
-  total = document.getElementById('total');
-  //media = parseFloat(document.getElementById('media').value);
-  $(document.getElementsByName('p')).bind('click', function() {
 
-    var valTotal = total.value;
+   $(document).ready(function(e) {
+       var val = [];
+            $("#btnverificar").click(function(e) {
+                $.each(($("input[type=checkbox]:checked")), function(index, obj){
 
-    valTotal = parseFloat(valTotal.replace(',', '.'));
-
-    var valInput = (this.value);
-    list.push(valInput);
-    valInput = parseFloat(valInput.replace(',', '.'));
-
-    
-    var value = (this.checked) ? parseFloat((valTotal + valInput)) : parseFloat((valTotal - valInput));
-    total.value = value;
-    var valores = total.value;
-    var muni = document.getElementById("municipio");
-    t_lista = list.length;
-    var aux = 0;
-    media = parseFloat(valores)/t_lista;
-    document.getElementById("medias").innerHTML = media;
-    document.getElementById("show_city").innerHTML = muni.value;
-
-    if (p.checked) {
-        document.getElementById("demo").innerHTML = list.length;
-
-    } else {
-        document.getElementById("demo").innerHTML = list.length --;
-    }
-
-    // alert(media);
-    
-  });
-
-});
+                    val.push(obj.value);
+                    alert(val.length);
+                });
+            });
+        });
 </script>
-    <script>
-        function verifica() {
 
-            cidades = document.getElementById("citys");
 
-                if(cidades.value !== "---"){
-                    document.getElementById('t').innerHTML = cidades.value;
-                }
-                {% for i in  locale %}
-                if (cidades.value == "{{ i.nomMunicipio }}"){
-                    $(document).ready(function(){
-                        $("button").click(function(){
-                            $("p").html('<div class="col-md-12 checkbox"><li class="list-group-item"><input type="checkbox" name="p" class="valores" class="w3-check" id="p" value="{{i.valUltimaVenda}}">{{i.dscProduto}} R$ {{i.valUltimaVenda}} <input type="text" size="45" id="municipio" value="{{ i.nomMunicipio }}" disabled/></li></div>');
-                        });
-                    });
-                }
-            {% endfor %}
-        }
-    </script>
-<script>
-function myFunction() {
-    location.reload();
-}
-</script>
 </head>
 <body >
   <div class="col-md-12 col-sm-12">
@@ -140,6 +92,7 @@ function myFunction() {
   </div>
   <div class="col-md-12 col-sm-12" >
   	<!-- <div class="col-md-6 col-sm-6" id="map-canvas"></div> -->
+  <button type="button" id="btnverificar">Duplicar Registro</button>
   	<div class="col-md-12">
   		<h3>Valores dos ítens selecionados</h3>
   		R$ <input type="text" size="45" name="total" id="total" value="0,00" disabled />

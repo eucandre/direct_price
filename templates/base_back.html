@@ -20,69 +20,34 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<!-- <script>
-	var map;
-
-	var markerData= [
-		
-		{lat: -9.57 , lng: -36.78  , zoom: 8 , name: "Alagoas"},
-		{lat: -9.53, lng: -37.29  , zoom: 13 , name: "Olho dagua das Flores"},
-		{lat: -9.37 , lng: -37.24  , zoom: 13 , name: "Santana do Ipanema"},
-		{lat: -9.75 , lng: -36.66  , zoom: 13 , name: "Arapiraca"},
-		{lat: -9.64 , lng: -35.70  , zoom: 13 , name: "Maceió"},
-		{lat: -10.29 , lng: -36.60  , zoom: 13 , name: "Penedo"},
-		{lat: -9.38 , lng: -38.00  , zoom: 13 , name: "Delmiro Golveia"},
-		{lat: -9.75 , lng: -37.43  , zoom: 13 , name: "Pão de Açucar"},
-		{lat: -9.40 , lng: -36.63  , zoom: 13 , name: "Palmeria dos Índios"},
-		{lat: -9.67 , lng: -37.13  , zoom: 13 , name: "Batalha"},
-		
-	];
-	 
-	function initialize() {
-		 	map = new google.maps.Map(document.getElementById('map-canvas'), {
-				zoom: 8,
-				center: {lat: -9.53, lng: -37.29}
-			});
-			markerData.forEach(function(data) {
-				var newmarker= new google.maps.Marker({
-					map:map,
-					position:{lat:data.lat, lng:data.lng},
-					title: data.name
-				});
-				jQuery("#selectlocation").append('<option value="'+[data.lat, data.lng,data.zoom].join('|')+'">'+data.name+'</option>');
-			});
-
-	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
-
-	jQuery(document).on('change','#selectlocation',function() {
-		var latlngzoom = jQuery(this).val().split('|');
-		var newzoom = 1*latlngzoom[2],
-		newlat = 1*latlngzoom[0],
-		newlng = 1*latlngzoom[1];
-		map.setZoom(newzoom);
-		map.setCenter({lat:newlat, lng:newlng});
-	});
-
-</script> -->
 <script >
+$(function(){
+	total = document.getElementById('total');
+	list = new Array();
+	$(document.getElementsByName('p')).bind('click',function(){
 
-   $(document).ready(function(e) {
-       var val = [];
-            $("#btnverificar").click(function(e) {
-                $.each(($("input[type=checkbox]:checked")), function(index, obj){
+		var valTotal = total.value;
 
-                    val.push(obj.value);
-                    //var value = (this.checked) ? parseFloat((valTotal + valInput)) : parseFloat((valTotal - valInput));
-                    total.value = obj.value;
-                    t_lista = val.length;
-                });
-                alert(val.length);
+		valTotal = parseFloat(valTotal.replace(',','.'));
 
-            });
+		var valInput = (this.value);
 
-        });
+		valInput = parseFloat(valInput.replace(',','.'));
+
+		var novoTotal=0;
+		total.value = (this.checked) ? parseFloat(( valTotal + valInput )) : parseFloat(( valTotal - valInput )) ;
+		list.push(valInput);
+		t_lista = list.length;
+		var valores = total.value;
+
+		media = parseFloat(valores)/t_lista;
+		document.getElementById('medias').innerHTML = media;
+		document.getElementById('demo').innerHTML = t_lista;
+		if (!this.checked){
+	       list.pop();
+    }
+	});
+});
 </script>
 
 
@@ -97,7 +62,7 @@
   </div>
   <div class="col-md-12 col-sm-12" >
   	<!-- <div class="col-md-6 col-sm-6" id="map-canvas"></div> -->
-  <button type="button" id="btnverificar">Duplicar Registro</button>
+
   	<div class="col-md-12">
   		<h3>Valores dos ítens selecionados</h3>
   		R$ <input type="text" size="45" name="total" id="total" value="0,00" disabled />

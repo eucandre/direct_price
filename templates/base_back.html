@@ -74,9 +74,14 @@
                 $.each(($("input[type=checkbox]:checked")), function(index, obj){
 
                     val.push(obj.value);
-                    alert(val.length);
+                    //var value = (this.checked) ? parseFloat((valTotal + valInput)) : parseFloat((valTotal - valInput));
+                    total.value = obj.value;
+                    t_lista = val.length;
                 });
+                alert(val.length);
+
             });
+
         });
 </script>
 

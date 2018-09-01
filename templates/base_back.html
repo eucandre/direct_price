@@ -35,19 +35,31 @@ $(function(){
 
 		valInput = parseFloat(valInput.replace(',','.'));
 
-		var novoTotal=0;
-		total.value = (this.checked) ? parseFloat(( valTotal + valInput )) : parseFloat(( valTotal - valInput )) ;
-		list.push(valInput);
-		t_lista = list.length;
-		var valores = total.value;
 
-		media = parseFloat(valores)/t_lista;
-		document.getElementById('medias').innerHTML = media;
-		document.getElementById('demo').innerHTML = t_lista;
-		if (!this.checked){
-	       list.pop();
-	       alert(list.length);
-    }
+		total.value = (this.checked) ? parseFloat(( valTotal + valInput )) : parseFloat(( valTotal - valInput )) ;
+
+		if (this.checked){
+		    list.push(valInput);
+            t_lista = list.length;
+            var valores = total.value;
+
+            media = parseFloat(valores)/t_lista;
+            document.getElementById('medias').innerHTML = media;
+            document.getElementById('demo').innerHTML = t_lista;
+        }else{
+		    var removido = list.splice(list[this.checked],1);
+		    tirados = new Array();
+            tirados.push(removido);
+            t_lista = list.length;
+            var valores = total.value;
+
+            media = parseFloat(valores)/t_lista;
+            document.getElementById('medias').innerHTML = media;
+            document.getElementById('demo').innerHTML = t_lista;
+            document.getElementById('removido').innerHTML = list;
+        }
+
+		//list.forEach(function (p1, p2, p3) { alert(p1,p2); })
 	});
 });
 </script>
@@ -68,7 +80,13 @@ $(function(){
   	<div class="col-md-12">
   		<h3>Valores dos ítens selecionados</h3>
   		R$ <input type="text" size="45" name="total" id="total" value="0,00" disabled />
-	  </div>	
+	  </div>
+
+    <div class="col-md-12">
+        <h3>Elementos retirados da lista</h3>
+  		<span id="removido"></span>
+
+    </div>
 
 	  <div class="col-md-12">
   		<h3>Média dos Valores dos ítens selecionados</h3>

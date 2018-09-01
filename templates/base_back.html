@@ -22,6 +22,7 @@
 
 <script >
 $(function(){
+    var x = 0;
 	total = document.getElementById('total');
 	list = new Array();
 	$(document.getElementsByName('p')).bind('click',function(){
@@ -45,6 +46,7 @@ $(function(){
 		document.getElementById('demo').innerHTML = t_lista;
 		if (!this.checked){
 	       list.pop();
+	       alert(list.length);
     }
 	});
 });

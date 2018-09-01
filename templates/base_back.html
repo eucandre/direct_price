@@ -46,6 +46,7 @@ $(function(){
             media = parseFloat(valores)/t_lista;
             document.getElementById('medias').innerHTML = media;
             document.getElementById('demo').innerHTML = t_lista;
+            document.getElementById('removido').innerHTML = list;
         }else{
 		    var removido = list.splice(list[this.checked],1);
 		    tirados = new Array();
@@ -83,7 +84,7 @@ $(function(){
 	  </div>
 
     <div class="col-md-12">
-        <h3>Elementos retirados da lista</h3>
+        <h3>Lista</h3>
   		<span id="removido"></span>
 
     </div>
